@@ -1,0 +1,6 @@
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web:${springBootVersion}')
+	compile project(':process-engine-api')
+	compile project(':user-security-service')
+	compile('org.apache.poi:poi-ooxml:3.15')
+}

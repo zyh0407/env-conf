@@ -1,0 +1,184 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.2.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+ext {
+    activitiSpringVersion = '5.22.0'
+    springBootVersion = '1.5.2.RELEASE'
+    fasterXmlJacksonVersion = '2.8.7'
+}
+
+allprojects {
+	apply plugin: 'java'
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		compile('org.slf4j:slf4j-api:1.7.23')
+	}
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+
+jar {
+	baseName = 'paf-app'
+	version = '0.0.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configure(subprojects.findAll { println it.name; (it.name != 'core-model' && it.name.endsWith("-model")) }) {
+	dependencies {
+		compile project(':core-model')
+	}
+}
+
+configure(subprojects.findAll { println it.name; (it.name != 'core-repository' && it.name.endsWith("-repository")) }) {
+	dependencies {
+		compile project(':core-repository')
+
+		testCompile project(':core-repository').sourceSets.test.output
+	}
+}
+
+configure(subprojects.findAll { println it.name; (it.name != 'core-service' && it.name.endsWith("-service")) }) {
+	dependencies {
+		compile project(':core-service')
+	}
+}
+
+configure(subprojects.findAll { println it.name; (it.name != 'core-control' && it.name.endsWith("-control")) }) {
+	dependencies {
+		compile project(':core-control')
+	}
+}
+
+
+configure(subprojects.findAll { println it.name; ( it.name.endsWith("-repository") ) }) {
+	def supportedProjectName = "$project.name" - "-repository" + "-model"
+	if ( rootProject.subprojects.any{ it.name == supportedProjectName } ) {
+		dependencies {
+			compile project(":${supportedProjectName}")
+		}
+	}  else {
+		println "WARNING: ${it.name} has no ${supportedProjectName}"
+	}
+}
+
+configure(subprojects.findAll { println it.name; ( it.name.endsWith("-service") ) }) {
+	def supportedProjectName = "$project.name" - "-service" + "-repository"
+	if ( rootProject.subprojects.any{ it.name == supportedProjectName } ) {
+		dependencies {
+			compile project(":${supportedProjectName}")
+		}
+	}  else {
+		println "WARNING: ${it.name} has no ${supportedProjectName}"
+	}
+}
+
+configure(subprojects.findAll { println it.name; ( it.name.endsWith("-control") ) }) {
+	def supportedProjectName = "$project.name" - "-control" + "-service"
+	// println "YOU ARE IN: $project.name, and its base name is ${supportedProjectName}, depends on ${supportedProjectName}-service"
+	if ( rootProject.subprojects.any{ s -> s.name == supportedProjectName } ) {
+		dependencies {
+			compile project(":${supportedProjectName}")
+		}
+	}  else {
+		println "WARNING: ${it.name} has no ${supportedProjectName}"
+	}
+}
+
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-web')
+
+	compile('org.springframework.boot:spring-boot-starter-jersey')
+	compile('org.slf4j:slf4j-api:1.7.23')
+	compile('org.apache.commons:commons-lang3:3.5')
+	compile('org.springframework.boot:spring-boot-starter-groovy-templates')
+	compile('com.graphql-java:graphql-java:2.3.0')
+	
+	compile('org.springframework.boot:spring-boot-starter-hateoas')
+	
+    compile "io.springfox:springfox-swagger2:2.6.1"
+    compile "io.springfox:springfox-swagger-ui:2.6.1"
+    
+	compile project(':core-model')
+	compile project(':core-repository')
+	compile project(':core-service')
+	compile project(':core-control')
+
+	compile project(':ref-table-model')
+	compile project(':ref-table-repository')
+	compile project(':ref-table-service')
+	compile project(':ref-table-control')
+
+	compile project(':user-security-model')
+	compile project(':user-security-repository')
+	compile project(':user-security-service')
+	compile project(':user-security-control')
+
+	compile project(':org-model')
+	compile project(':org-repository')
+	compile project(':org-service')
+	compile project(':org-control')
+
+
+	compile project(':process-def-model')
+	compile project(':process-def-repository')
+	compile project(':process-def-service')
+	compile project(':process-def-control')
+
+	compile project(':process-audit-model')
+	compile project(':process-audit-repository')
+	compile project(':process-audit-service')
+	compile project(':process-audit-control')
+
+	compile project(':process-bus-model')
+	compile project(':process-bus-repository')
+	compile project(':process-bus-service')
+	compile project(':process-bus-control')
+
+	compile project(':process-engine-api')
+	compile project(':process-engine-impl-actv')
+
+	compile project(':process-flow-impl-actv')
+
+	compile project(':module-xls')
+
+	compile project(':module-barcode')
+	compile project(':module-ocr-pdf')
+
+	compile project(':module-email')
+
+	compile project(':module-sms')
+
+	compile project(':process-module-multi-item')
+
+	compile project(':addon-batch-loader')
+
+	compile project(':addon-doc-uploader')
+
+	runtime('mysql:mysql-connector-java')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile('org.springframework.security:spring-security-test')
+}

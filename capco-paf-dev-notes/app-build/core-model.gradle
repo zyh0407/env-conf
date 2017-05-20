@@ -1,0 +1,10 @@
+dependencies {
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: "${fasterXmlJacksonVersion}"
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: "${fasterXmlJacksonVersion}"
+	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${fasterXmlJacksonVersion}"
+	
+	compile('org.apache.commons:commons-lang3:3.5')
+	compile('org.apache.commons:commons-collections4:4.1')
+	
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}

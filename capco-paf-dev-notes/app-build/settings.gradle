@@ -1,0 +1,25 @@
+def modules = [
+				'core-model', 'core-repository', 'core-service', 'core-control'
+				, 'org-model', 'org-repository', 'org-service',  'org-control'
+				, 'user-security-model', 'user-security-repository', 'user-security-service', 'user-security-control'
+				, 'process-def-model', 'process-def-repository', 'process-def-service', 'process-def-control'
+				, 'process-bus-model', 'process-bus-repository', 'process-bus-service', 'process-bus-control'
+				, 'process-audit-model', 'process-audit-repository', 'process-audit-service', 'process-audit-control'
+				, 'ref-table-model', 'ref-table-repository', 'ref-table-service', 'ref-table-control'
+				, 'addon-batch-loader'
+				, 'addon-doc-uploader'
+				, 'process-engine-api', 'process-engine-impl-actv', 'process-flow-impl-actv'
+				, 'module-xls'
+				, 'module-barcode'
+				, 'module-ocr-pdf'
+				, 'module-email'
+				, 'module-sms'
+
+				, 'process-module-multi-item'
+				]
+
+modules.each { it -> 
+	include it
+	project(":${it}").projectDir = file("${it}")
+	project(":${it}").buildFileName = "${it}.gradle"
+}

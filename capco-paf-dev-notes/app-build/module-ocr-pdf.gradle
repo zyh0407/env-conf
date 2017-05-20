@@ -1,0 +1,6 @@
+dependencies {
+    compile 'org.apache.tika:tika-core:1.14'
+    compile 'org.apache.tika:tika-parsers:1.14'
+    
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}

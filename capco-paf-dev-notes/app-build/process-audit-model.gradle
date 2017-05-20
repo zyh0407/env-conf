@@ -1,0 +1,4 @@
+dependencies {
+	compile project(':process-def-model')
+	compile project(':user-security-model')
+}

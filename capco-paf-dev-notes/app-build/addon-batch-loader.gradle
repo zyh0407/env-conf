@@ -1,0 +1,9 @@
+dependencies {
+	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+	compile project(':core-control')
+	compile project(':module-xls')
+	compile project(':process-bus-service')
+	compile project(':process-engine-api')
+	
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}

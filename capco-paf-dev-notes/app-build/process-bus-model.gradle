@@ -1,0 +1,6 @@
+dependencies {
+	compile project(':process-def-model')
+	compile project(':ref-table-model')
+	
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}

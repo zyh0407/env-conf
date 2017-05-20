@@ -1,0 +1,7 @@
+dependencies {
+	compile project(':process-engine-api')
+	compile project(':process-audit-model')
+	compile project(':process-flow-impl-actv')
+	compile project(':user-security-model')
+	compile("org.activiti:activiti-spring-boot-starter-basic:${activitiSpringVersion}")
+}

@@ -1,0 +1,7 @@
+dependencies {
+	compile project(':module-email')
+	compile project(':module-sms')
+	compile project(':user-security-service')
+	compile project(':process-audit-model')
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}
