@@ -1,0 +1,22 @@
+# ~/.tmuxinator/paf-dev.yml
+
+name: paf
+root: ~/fis.bitbucket/paf
+
+pre: docker start dev-mysql-1
+
+windows:
+  - app-1: 
+    - cd paf-app
+  - app-2: 
+      layout: main-horizontal
+      #layout: main-vertical
+      panes:
+        - main: 
+           - cd paf-app
+           - ls
+        - bins: 
+           - cd paf-app/src/test/bins
+           - ls
+  - root: 
+  - tmp:
