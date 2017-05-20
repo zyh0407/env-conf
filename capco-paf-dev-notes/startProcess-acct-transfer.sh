@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 process=accountTransfer
 amt=${1-12000}

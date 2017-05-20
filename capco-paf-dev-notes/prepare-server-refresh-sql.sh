@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 PAF_APP=../../../
 PAF_CORE=../../../../paf-core

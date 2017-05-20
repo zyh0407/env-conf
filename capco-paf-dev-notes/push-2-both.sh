@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo "...Refreshing MYSQL DB... "
 ./push-2-mysql-server.sh

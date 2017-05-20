@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 BGN_TIME=$(date)
 echo "beginning at " $BGN_TIME

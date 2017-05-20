@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ROOT=/opt/paf
 UI_JAR=$ROOT/ui.jar

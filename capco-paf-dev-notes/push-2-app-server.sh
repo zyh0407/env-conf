@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 LOCAL_APP_FILE=paf-app-0.0.1-SNAPSHOT.jar
 REMOTE_APP_FILE=uwork-0.0.1-SNAPSHOT.jar
