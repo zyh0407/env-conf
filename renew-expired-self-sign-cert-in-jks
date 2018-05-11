@@ -1,0 +1,15 @@
+1. double check current private key information, see "Valid from:" attribute
+keytool -list -v -keystore gz.jks -alias gz
+
+2. extract current private key to pem format
+keytool -importkeystore -srckeystore gz.jks -destkeystore gz.p12 -deststoretype PKCS12 -srcalias gz
+openssl pkcs12 -in gz.p12  -nodes -nocerts -out gz-private.pem
+
+3. create new self sign certificate
+openssl req -x509 -new -nodes -key gz-private.pem -sha256 -days 4800 -out new-gz-cert-in-10-years.pem
+
+4. import back the new self sign certificate to original key store
+keytool -import -keystore gz.jks -file new-gz-cert-in-10-years.pem -alias gz
+
+5.list current renewed certificate
+keytool -list -v -keystore gz.jks -alias gz
